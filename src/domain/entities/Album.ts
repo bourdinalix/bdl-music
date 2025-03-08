@@ -1,3 +1,5 @@
+import { CurrencyCode } from '../constants/currencies';
+
 export interface Album {
   id: string;
   title: string;
@@ -5,7 +7,7 @@ export interface Album {
   imageUrl: string;
   price: {
     amount: number;
-    currency: string;
+    currency: CurrencyCode;
   };
   releaseDate: string;
   category: string;
@@ -29,8 +31,8 @@ export interface AlbumResponse {
       }>;
       'im:price': {
         attributes: {
-            amount: string;
-            currency: string;
+          amount: string;
+          currency: CurrencyCode;
         };
       };
       'im:releaseDate': {
