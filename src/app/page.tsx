@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Album } from '@/domain/entities/Album';
 import { AlbumCard } from '@/presentation/components/AlbumCard';
+import { CategoryFilter } from '@/presentation/components/CategoryFilter';
 import { ITunesAlbumRepository } from '@/infrastructure/repositories/ITunesAlbumRepository';
 import { GetTopAlbumsUseCase } from '@/application/use-cases/album/GetTopAlbumsUseCase';
 import { SearchAlbumsUseCase } from '@/application/use-cases/album/SearchAlbumsUseCase';
@@ -10,6 +11,7 @@ import { SearchAlbumsUseCase } from '@/application/use-cases/album/SearchAlbumsU
 export default function Home() {
   const [albums, setAlbums] = useState<Album[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const albumRepository = new ITunesAlbumRepository();
@@ -42,6 +44,14 @@ export default function Home() {
     }
   };
 
+  const handleCategoryChange = (category: string | null) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredAlbums = selectedCategory
+    ? albums.filter(album => album.category === selectedCategory)
+    : albums;
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -53,21 +63,31 @@ export default function Home() {
   return (
     <main className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-center mb-8">
-        Itunes x BDL
+        iTunes x BDL
       </h1>
-      
-      <div className="mb-8">
-        <input
-          type="text"
-          placeholder="Rechercher un album..."
-          value={searchQuery}
-          onChange={(e) => handleSearch(e.target.value)}
-          className="w-full max-w-md mx-auto block px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+
+      <div className="flex justify-center items-center mb-8">
+        <div className="flex items-center gap-12">
+          <input
+            type="text"
+            placeholder="Rechercher un album..."
+            value={searchQuery}
+            onChange={(e) => handleSearch(e.target.value)}
+            className="w-[600px] px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          
+          <div className="w-48">
+            <CategoryFilter 
+              albums={albums}
+              onFilterChange={handleCategoryChange}
+              selectedCategory={selectedCategory}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {albums.map((album, index) => (
+        {filteredAlbums.map((album, index) => (
           <AlbumCard 
             key={album.id} 
             album={album}
