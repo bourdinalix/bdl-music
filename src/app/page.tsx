@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Album } from '@/domain/entities/Album';
 import { AlbumCard } from '@/presentation/components/AlbumCard';
 import { CategoryFilter } from '@/presentation/components/CategoryFilter';
@@ -48,9 +48,9 @@ export default function Home() {
     setSelectedCategory(category);
   };
 
-  const filteredAlbums = selectedCategory
+  const filteredAlbums = useMemo(() => selectedCategory
     ? albums.filter(album => album.category === selectedCategory)
-    : albums;
+  : albums, [albums, selectedCategory]);
 
   if (loading) {
     return (
