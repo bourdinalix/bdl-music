@@ -35,7 +35,15 @@ export class ITunesAlbumRepository implements IAlbumRepository {
   }
 
   async searchAlbums(query: string): Promise<Album[]> {
-    // TODO: Implement searchAlbums
-    return [];
+    try {
+      const albums = await this.getTopAlbums();
+      return albums.filter(album => 
+        album.title.toLowerCase().startsWith(query.toLowerCase()) ||
+        album.artist.toLowerCase().startsWith(query.toLowerCase())
+      );
+    } catch (error) {
+      console.error('Error searching albums:', error);
+      throw error;
+    }
   }
 } 
