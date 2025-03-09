@@ -1,48 +1,96 @@
-# bdl-music
+# BDL Music 🎵
 
-### Objective
+A music search application built with React and Next.js, allowing users to search for albums through the iTunes API and manage their favorites.
 
-BDL Capital Management is branching into the music business and needs a new website. Build it using TypeScript and React.
+## Prerequisites
 
-### Brief
+- Node.js (version 18 or higher)
+- npm or yarn
 
-In a fictional world, BDL Capital Management is branching into the music business and we need a new a website. This website needs to display the top 100 songs based on the iTunes API. This code challenge allows you to choose your own path and lets you flaunt your creative panache and technical skills along the way.
+## Installation
 
-### Tasks
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/bdl-music.git
+cd bdl-music
+```
 
-- Implement assignment using:
-  - Language: **TypeScript**
-  - Framework: **React**
-- Show top albums based on the json feed here: `https://itunes.apple.com/us/rss/topalbums/limit=100/json`
-- Cross browser support (or graceful degradation)
-- A clean modern look and responsive design
-- A good user experience
-- Use a CSS Framework (Bootstrap, Foundation, Pure, etc.…)
-- Allow the top 100 to be searchable
-- Surprise us! Add a feature that you think would work well here (for instance, advanced search, integration with other API, a "Favorite" functionality)
-- Describe the feature in separate markdown file
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
 
-### Deliverables
+## Getting Started
 
-Make sure to include all source code in the repository.
+To run the application in development mode:
 
-### Evaluation Criteria
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-- **TypeScript** best practices
-- We're looking for you to produce working code, with enough room to demonstrate how to structure components in a small program.
-- Show us your work through your commit history
-- Completeness: did you complete the features?
-- Correctness: does the functionality act in sensible, thought-out ways?
-- Maintainability: is it written in a clean, maintainable way?
-- Testing: is the system adequately tested?
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-### CodeSubmit
+## Main Features
 
-Create a repository to Github.com and invite this profile :
+- 🔍 Album search through iTunes API
+- 📑 Category filtering
+- ⭐ Favorites system
+- 💅 Modern and responsive user interface
 
-- https://github.com/jbbeuzelin
-- https://github.com/ndouilletbdl
+## Features Description
 
-Please organize, design, test and document your code as if it were going into production - then push your changes to the master branch. After you have pushed your code, you may submit the assignment on the assignment page.
+### Search System 🔍
+The search functionality allows users to find albums based on either the artist name or album title. The search implements a "starts with" logic, meaning it will match results that begin with the entered search term.
 
-All the best and happy coding,
+### Category Filter 📑
+The category system automatically collects all unique categories from the fetched albums and displays them in a user-friendly select dropdown menu. Users can easily switch between categories by simply clicking on their desired choice in the dropdown, instantly filtering the displayed albums.
+
+### Favorites System ⭐
+Each album card features a star icon in the top right corner. Users can mark their favorite albums by clicking on the star, which turns yellow to indicate the album has been favorited. The system uses local storage to persistently save the IDs of favorited albums, ensuring that user preferences are maintained between sessions.
+
+## Project Structure
+
+```
+bdl-music/
+├── src/
+│   ├── app/
+│   ├── application/
+│       ├── use-cases/
+│   ├── domain/
+│       ├── entities/
+│       ├── repositories/
+│       ├── services/
+│   ├── infrastructure/
+│       ├── repositories/
+│       ├── services/
+│   ├── presentation/
+│       ├── components/
+│       ├── hooks/
+└── public/
+```
+
+## Technologies Used
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+
+## Available Scripts
+
+- `npm run dev`: Starts the development server
+- `npm run build`: Creates a production build
+- `npm start`: Runs the application in production mode
+- `npm run lint`: Checks code with ESLint
+
+## Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request.
+
+## License
+
+MIT
