@@ -1,5 +1,6 @@
 import { Album } from '@/domain/entities/Album';
 import { formatCurrency } from '@/domain/constants/currencies';
+import { FavoriteStar } from '@/presentation/components/FavoriteStar';
 import Image from 'next/image';
 
 interface AlbumCardProps {
@@ -11,6 +12,7 @@ export const AlbumCard = ({ album, isPriority = false }: AlbumCardProps) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="relative h-48 w-full">
+        <FavoriteStar albumId={album.id} />
         <Image
           src={album.imageUrl}
           alt={album.title}
